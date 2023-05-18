@@ -1,4 +1,6 @@
-module.exports = {
-  publicPath: '/swim-org/'
-}
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true
+})
+
 
