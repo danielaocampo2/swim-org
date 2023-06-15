@@ -248,21 +248,28 @@ export default {
     },
     confirmEdit(card, index, type) {
       var edit = true;
+      var anterior=card.text;
       var id = card.tempText != "" ? card.tempText : card.text;
+      
       if (type == "card") {
+        edit =  this.cards[index].text != id ? false : true;
         this.cards[index].text = card.tempText;
         this.cards[index].editing = false;
-        edit = this.cards[index].text == "" ? true : false;
+
       } else {
+        edit = this.values[index].text != id ? false : true;
         this.values[index].text = card.tempText;
         this.values[index].editing = false;
-        edit = this.values[index].text == "" ? true : false;
-      }
-      index++;
-      const divElement = document.getElementById("number-" + id);
 
+      }
+      const divElement = document.getElementById("number-" + id);
       if (divElement) {
         if (!edit) {
+           if(anterior!=""){
+            const anteriorDiv = document.getElementById("number-" + anterior);
+            anteriorDiv.className = "card back";
+            this.statusNumbers[anterior] = true;
+          }
           divElement.className = "card back-disable";
           this.statusNumbers[id] = false;
         } else {
